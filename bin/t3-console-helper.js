@@ -4,6 +4,7 @@
 const figlet = require('figlet');
 const inquirer = require('inquirer');
 const shell = require('shelljs');
+const clc = require("cli-color");
 
 // variables:
 const executePath = process.cwd();
@@ -29,17 +30,32 @@ const consoleCommands = function () {
             name: 't3console',
             type: 'list',
             message: 'Which command do you want to run?',
+            pageSize: 20,
             choices: [
                 new inquirer.Separator('-- Cache --'),
                 'cache:flush',
+                'cache:flush --force',
                 new inquirer.Separator('-- Database --'),
                 'database:updateschema',
+                {
+                    name: 'database:export',
+                    value: 'database:export > backup.sql'
+                },
                 new inquirer.Separator('-- Install --'),
                 'install:fixfolderstructure',
-                'install:extensionsetupifpossible'],
+                'install:extensionsetupifpossible',
+                new inquirer.Separator('-- Language --'),
+                'language:update',
+                new inquirer.Separator('-- Exit --'),
+                'exit'
+            ],
+
             default: 0,
         }]).then((answers) => {
-            console.log(`\nRun: ${answers.t3console}\n`);
+            if (answers.t3console == 'exit') {
+                process.exit();
+            }
+            console.log(`\nRun: php typo3cms ${answers.t3console}\n`);
             const t3cmd = 'php typo3cms ' + answers.t3console;
             runCmd(t3cmd);
         });
@@ -47,7 +63,14 @@ const consoleCommands = function () {
 };
 
 const runCmd = function (command) {
-    shell.exec(command);
+    shell.exec(command, {silent:true}, function (code, stdout) {
+        if (code === 0) {
+            console.log(clc.greenBright(stdout));
+        } else if (code === 1) {
+            console.log(clc.redBright(stdout));
+        }
+        consoleCommands();
+    });
 };
 
 

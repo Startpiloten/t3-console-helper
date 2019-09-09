@@ -1,6 +1,6 @@
 {
   "name": "typo3-console-helper",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "TYPO3 Console Helper",
   "author": "Boris Schauer",
   "license": "GPL-3.0-or-later",
@@ -9,6 +9,7 @@
     "tc": "bin/t3-console-helper.js"
   },
   "dependencies": {
+    "cli-color": "^1.4.0",
     "figlet": "^1.2.4",
     "inquirer": "^7.0.0",
     "shelljs": "^0.8.3"
