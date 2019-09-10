@@ -32,21 +32,21 @@ const consoleCommands = function () {
             message: 'Which command do you want to run?',
             pageSize: 20,
             choices: [
-                new inquirer.Separator('-- Cache --'),
+                new inquirer.Separator('-- Cache'),
                 'cache:flush',
                 'cache:flush --force',
-                new inquirer.Separator('-- Database --'),
+                new inquirer.Separator('-- Database'),
                 'database:updateschema',
                 {
                     name: 'database:export',
                     value: 'database:export > backup.sql'
                 },
-                new inquirer.Separator('-- Install --'),
+                new inquirer.Separator('-- Install'),
                 'install:fixfolderstructure',
                 'install:extensionsetupifpossible',
-                new inquirer.Separator('-- Language --'),
+                new inquirer.Separator('-- Language'),
                 'language:update',
-                new inquirer.Separator('-- Exit --'),
+                new inquirer.Separator('-- Exit'),
                 'exit'
             ],
 
