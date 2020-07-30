@@ -44,6 +44,7 @@ const consoleCommands = function () {
                 new inquirer.Separator('-- Install'),
                 'install:fixfolderstructure',
                 'install:extensionsetupifpossible',
+                'install:generatepackagestates',
                 new inquirer.Separator('-- Language'),
                 'language:update',
                 new inquirer.Separator('-- Exit'),
